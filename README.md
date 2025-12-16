@@ -5,21 +5,15 @@
 - npm (>= 9)
 - MongoDB running locally on 127.0.0.1
 
-## What you will do
-- Refactor data fetching to use TanStack Query
-- Manage shared state with Zustand
-- Add user login/logout functionality
-- Add comment functionality
-- Add photo upload functionality
-- Add user registration with passwords
+## User Stories Implemented
+- Photo likes
+- Photo favoriting and favorites page for every user
+- Ability to delete content (photos, comments, user accounts)
+- Photo highlights: the user details page shows the user's most recent and most popular image
 
-## Install
+## Install Dependencies
 ```bash
 npm install
-npm i @tanstack/react-query
-npm i zustand
-npm install express-session
-npm install multer
 ```
 
 If you need to install test deps:
@@ -33,9 +27,9 @@ cd test && npm install && cd ..
 ```bash
 node loadDatabase.js
 ```
-This clears and reloads `User`, `Photo`, and a single `SchemaInfo` document into the `project3` database.
+This clears and reloads `User`, `Photo`, and a single `SchemaInfo` document into the `project4` database.
 
-**Note:** Make sure your `webServer.js` connects to `mongodb://127.0.0.1/project3`.
+**Note:** Make sure `webServer.js` connects to `mongodb://127.0.0.1/project4` and `project4` exists in MongoDB.
 
 ## Run client + server together
 ```bash
