@@ -5,7 +5,8 @@
 
 ## How to run
 1) Make sure MongoDB is running locally.
-2) Load demo data:
+2) Install node dependencies (`npm install`)
+3) Load demo data:
 ```bash
 node loadDatabase.js
 ```
