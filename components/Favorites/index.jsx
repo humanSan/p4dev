@@ -86,9 +86,13 @@ function Favorites() {
                             >
                                 <CardMedia
                                     component="img"
-                                    height="140"
                                     image={`/images/${photo.file_name}`}
                                     alt={photo.file_name}
+                                    sx={{
+                                        aspectRatio: '1.4',
+                                        objectFit: 'cover',
+                                        width: '100%'
+                                    }}
                                 />
                                 <IconButton
                                     aria-label="remove from favorites"
