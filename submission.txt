@@ -8,7 +8,7 @@ Navigate to any user’s profile page. The page displays the user’s most recen
 Story number and name: 5 - Deleting comments, photos, and users
 Story points: 4
 Brief description to see the story in action:
-As a logged-in user, delete your own comments and photos using the delete buttons. From the user profile page, delete the user account after confirming the warning; all associated photos and comments are removed and the user is logged out.
+As a logged-in user, delete your own comments and photos using the delete buttons. From the right hand side of the top bar, delete the user account after confirming the warning; all associated photos and comments are removed and the user is logged out.
 
 Story number and name: 6 - Photo "like" votes
 Story points: 4
@@ -20,7 +20,7 @@ and photos are sorted by like count (descending) with timestamp as a tie-breaker
 Story number and name: 7 - Favorite list of photos for users
 Story points: 6
 Brief description to see the story in action:
-Users can favorite a photo by clicking on the "favorite" button. To remove a favorite they need to navigate to /favorites. Click the Favorites button in the toolbar to do so. From here, users can unfavorite photos, view thumbnails of favorite photos, and open them in a modal viewer.
+Users can favorite a photo by clicking on the "favorite" button. To view and remove a favorite image they need to navigate to /favorites. Click the Favorites button in the top bar to do so. From here, users can unfavorite photos, view thumbnails of favorite photos, and open them in a modal viewer.
 
 Total Story Points: 17
 
