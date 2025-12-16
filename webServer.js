@@ -755,7 +755,7 @@ app.delete('/user', checkLoggedIn, async (req, res) => {
   const userId = req.session.user._id;
 
   try {
-    // 1. Get all photos owned by user to delete files
+    // Get all photos owned by user to delete files
     const userPhotos = await Photo.find({ user_id: userId });
     for (const photo of userPhotos) {
       const filePath = `./images/${photo.file_name}`;
@@ -764,25 +764,31 @@ app.delete('/user', checkLoggedIn, async (req, res) => {
       }
     }
 
-    // 2. Delete all photos owned by user
+    // Delete all photos owned by user
     await Photo.deleteMany({ user_id: userId });
 
-    // 3. Delete all comments made by user from all photos
+    // Delete all comments made by user from all photos
     await Photo.updateMany(
       { 'comments.user_id': userId },
       { $pull: { comments: { user_id: userId } } }
     );
 
-    // 4. Remove user from all favorites
+    // Remove user's photos from all users' favorites
     await User.updateMany(
       {},
       { $pull: { favorites: { $in: userPhotos.map(p => p._id) } } }
     );
 
-    // 5. Delete the user document
+    // Remove user's likes from all photos
+    await Photo.updateMany(
+      { likes: userId },
+      { $pull: { likes: userId } }
+    );
+
+    // Delete the user document (also removes user's own favorites array)
     await User.findByIdAndDelete(userId);
 
-    // 6. Destroy session
+    // Destroy session
     req.session.destroy((err) => {
       if (err) {
         console.error('Error destroying session:', err);
