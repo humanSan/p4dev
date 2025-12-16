@@ -1,47 +1,18 @@
 # Project 4: User Stories and Real Time Updates
 
-## Prerequisites
-- Node.js LTS (>= 18)
-- npm (>= 9)
-- MongoDB running locally on 127.0.0.1
-
 ## User Stories Implemented
-- Photo likes
-- Photo favoriting and favorites page for every user
-- Ability to delete content (photos, comments, user accounts)
-- Photo highlights: the user details page shows the user's most recent and most commented on photo
+- 1, 5, 6, 7
 
-## Install Dependencies
-```bash
-npm install
-```
-
-If you need to install test deps:
-```bash
-cd test && npm install && cd ..
-```
-
-## Load the database
+## How to run
 1) Make sure MongoDB is running locally.
 2) Load demo data:
 ```bash
 node loadDatabase.js
 ```
-This clears and reloads `User`, `Photo`, and a single `SchemaInfo` document into the `project4` database.
-
-**Note:** Make sure `webServer.js` connects to `mongodb://127.0.0.1/project4` and `project4` exists in MongoDB.
 
 ## Run client + server together
 ```bash
 npm run dev
-```
-- Client (Vite): http://localhost:3000
-- Server (Express): http://localhost:3001
-
-Individual scripts:
-```bash
-npm run server   # nodemon webServer.js (port 3001)
-npm run client   # vite (port 3000)
 ```
 
 ## API endpoints
@@ -53,28 +24,3 @@ npm run client   # vite (port 3000)
 - `POST /commentsOfPhoto/:photo_id` → add comment to photo (requires auth, body: { comment })
 - `POST /photos/new` → upload photo (requires auth, multipart form data)
 - `POST /user` → register new user (body: { login_name, password, first_name, last_name, location, description, occupation })
-
-## Testing (backend)
-From `test` directory:
-```bash
-npm install   # if not already
-npm test
-```
-
-**Important:** Run `loadDatabase.js` before running tests, as tests assume the database has only the objects from `loadDatabase.js`.
-
-## Linting
-```bash
-npm run lint
-```
-Fix issues:
-```bash
-npm run lint:fix
-```
-
-## Common issues
-- Mongo not running → start MongoDB before `loadDatabase.js` and `npm run server`.
-- Port conflicts → Vite uses 3000, server uses 3001. Adjust if needed.
-- Database name → make sure `webServer.js` connects to `project4` database (not `project4`).
-- Session cookies → tests require proper session cookie handling with express-session.
-- File uploads → ensure `images` directory exists for photo uploads.
