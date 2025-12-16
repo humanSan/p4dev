@@ -32,6 +32,8 @@ import SchemaInfo from "./schema/schemaInfo.js";
 const portno = 3001; // Port number to use
 const app = express();
 const httpServer = createServer(app);
+
+// This sets up sockets for real time updates with likes.
 const io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:3000",
@@ -514,7 +516,7 @@ app.get('/admin/current', (request, response) => {
 });
 
 /**
- * URL /photos/like/:id - Like a photo
+ * URL /photos/like/:id - Like a photo (with realtime updates and broadcasting)
  */
 app.post('/photos/like/:id', checkLoggedIn, async (req, res) => {
   const { id } = req.params;
@@ -535,7 +537,7 @@ app.post('/photos/like/:id', checkLoggedIn, async (req, res) => {
       photo.likes.push(userId);
       await photo.save();
 
-      // Broadcast update
+      // Broadcast update realtime
       io.emit('like_update', {
         photo_id: photo._id,
         likes: photo.likes
@@ -549,7 +551,7 @@ app.post('/photos/like/:id', checkLoggedIn, async (req, res) => {
 });
 
 /**
- * URL /photos/unlike/:id - Unlike a photo
+ * URL /photos/unlike/:id - Unlike a photo (with realtime updates and broadcasting)
  */
 app.post('/photos/unlike/:id', checkLoggedIn, async (req, res) => {
   const { id } = req.params;
@@ -570,7 +572,7 @@ app.post('/photos/unlike/:id', checkLoggedIn, async (req, res) => {
       photo.likes = photo.likes.filter(uid => String(uid) !== String(userId));
       await photo.save();
 
-      // Broadcast update
+      // Broadcast update realtime
       io.emit('like_update', {
         photo_id: photo._id,
         likes: photo.likes

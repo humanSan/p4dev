@@ -56,6 +56,7 @@ function UserPhotos({ userId, photoId }) {
   const queryClient = useQueryClient();
   const currentUser = useStore(state => state.currentUser);
 
+  // Sockets are used for real time updates for the likes
   useEffect(() => {
     const socket = io('http://localhost:3001');
 
@@ -76,6 +77,7 @@ function UserPhotos({ userId, photoId }) {
     };
   }, [queryClient, userId]);
 
+  // User likes/unlikes the photo, send like to endpoint via the fetchData functions
   const handleLike = async (photo) => {
     if (!currentUser) return;
     const isLiked = photo.likes && photo.likes.includes(currentUser._id);
@@ -90,12 +92,13 @@ function UserPhotos({ userId, photoId }) {
     }
   };
 
+  // FAVORITES
   const { data: favorites } = useQuery({
     queryKey: ['favorites'],
     queryFn: fetchFavorites,
     enabled: !!currentUser
   });
-
+  
   const handleFavorite = async (photoIdToFav) => {
     try {
       await addToFavorites(photoIdToFav);
@@ -113,7 +116,6 @@ function UserPhotos({ userId, photoId }) {
       console.error("Error deleting photo:", err);
     }
   };
-
   const handleDeleteComment = async (targetPhotoId, commentId) => {
     try {
       await deleteComment(targetPhotoId, commentId);
@@ -149,7 +151,7 @@ function UserPhotos({ userId, photoId }) {
   const formatDateTime = (isoString) => `${new Date(isoString).toLocaleDateString()} at ${new Date(isoString).toLocaleTimeString()}`;
 
   if (advViewEnabled) {
-    // 1- Use advanced view if Advanced Features is Enabled
+    // Use advanced view if Advanced Features is Enabled
 
     // If the user has no photos, then render a placeholder.
     if (!sortedPhotos || sortedPhotos.length === 0) {
@@ -163,13 +165,13 @@ function UserPhotos({ userId, photoId }) {
       );
     }
 
-    // 2 - Get Current Photo with index
+    // Get Current Photo with index
     const curIndex = sortedPhotos.findIndex(foto => foto._id === photoId);
     if (curIndex === -1) return <Typography>Photo not found</Typography>;
 
     const curPhoto = sortedPhotos[curIndex];
 
-    // 3 - Create handlers
+    // Create handlers
     // When the next photo button is clicked, we get the next photo in photos array, and use its ID for the route and navigate to that route.
     const onForward = () => {
       const nextPhoto = sortedPhotos[curIndex + 1];
@@ -182,7 +184,7 @@ function UserPhotos({ userId, photoId }) {
       if (nextPhoto) navigate(`/photos/${userId}/${nextPhoto._id}`);
     };
 
-    // 4 - Render JSX (render previous/next buttons, current photo, and comments)
+    // Render JSX (render previous/next buttons, current photo, and comments)
     return (
       <div>
         <Typography variant="h4" gutterBottom>

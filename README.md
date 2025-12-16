@@ -1,4 +1,4 @@
-# Project 3: State, Sessions and Input (React + Vite + Axios + TanStack Query + Zustand)
+# Project 4: User Stories and Real Time Updates
 
 ## Prerequisites
 - Node.js LTS (>= 18)
@@ -9,7 +9,7 @@
 - Photo likes
 - Photo favoriting and favorites page for every user
 - Ability to delete content (photos, comments, user accounts)
-- Photo highlights: the user details page shows the user's most recent and most popular image
+- Photo highlights: the user details page shows the user's most recent and most commented on photo
 
 ## Install Dependencies
 ```bash

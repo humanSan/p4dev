@@ -60,7 +60,7 @@ function UserDetail({ userId }) {
 
       </Typography>
 
-      {/* Photo Highlights */}
+      {/* Photo Highlights with most recent photo and the photo with the most comments */}
       {highlightsLoading ? (
         <CircularProgress size={20} />
       ) : highlights && (highlights.mostRecent || highlights.mostComments) ? (

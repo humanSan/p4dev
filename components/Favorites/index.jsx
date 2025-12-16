@@ -4,7 +4,6 @@ import {
     Grid,
     Card,
     CardMedia,
-    CardContent,
     IconButton,
     Modal,
     Box,
@@ -17,10 +16,7 @@ function Favorites() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
-    useEffect(() => {
-        loadFavorites();
-    }, []);
-
+    // loadFavorites fetches favorite photos of the user
     const loadFavorites = async () => {
         try {
             const data = await fetchFavoritesAPI();
@@ -31,6 +27,11 @@ function Favorites() {
         }
     };
 
+    useEffect(() => {
+        loadFavorites();
+    }, []);
+
+    // Removes favorite when user clicks trash button
     const handleRemoveFavorite = async (e, photoId) => {
         e.stopPropagation(); // Prevent opening modal
         try {
@@ -41,6 +42,7 @@ function Favorites() {
         }
     };
 
+    // Modal for photo on favorites page
     const handleOpenModal = (photo) => {
         setSelectedPhoto(photo);
         setModalOpen(true);
